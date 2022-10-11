@@ -1,0 +1,60 @@
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #404c51;
+
+
+}
+
+a{
+  text-decoration: none;
+  color: #337ab7 ;
+}
+
+label {
+  font-weight: bold;
+}
+
+
+@media (min-width: 1200px) {
+
+  .menu-Login{
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .container {
+    width: 1170px;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 40em) {
+  .col-valor-header {
+    width: 120px;
+    text-align: center !important;
+  }
+
+  .col-valor-content {
+    text-align: right !important;
+  }
+
+  .col-data-header {
+    width: 120px;
+  }
+
+  .col-data-content {
+    text-align: center !important;
+  }
+
+  .col-acoes {
+    width: 120px;
+  }
+
+  .col-acoes>a {
+    margin: 0 5px;
+  }
+
+
+}

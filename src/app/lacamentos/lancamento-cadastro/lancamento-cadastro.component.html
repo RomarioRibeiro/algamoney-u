@@ -1,0 +1,61 @@
+  <div class="container">
+    <form #form="ngForm" autocomplete="off" (ngSubmit)="salvar(form)">
+
+      <div class="grid">
+        <div class="col-12">
+      <h1>{{editando ? 'Edição de': 'Novo'}} Lançamento</h1>
+    </div>
+
+    <div class="col-12">
+      <p-selectButton [options]="tipos" name="tipo"  #tipo [(ngModel)]="lancamento.tipo"></p-selectButton>
+    </div>
+
+    <div class="col-6 md:col-3 p-fluid">
+      <label>Vencimento</label>
+      <p-calendar name="vencimento" dateFormat="dd/mm/yy" [inline]="false" [readonlyInput]="false" [showIcon]="false"
+      [(ngModel)]="lancamento.dataVencimento" name="dataVencimento" #vencimento="ngModel" [required]="true">
+    </p-calendar>
+      <p-message *ngIf="vencimento.hasError('required') && vencimento.touched" severity="error" text="Informe uma data"></p-message>
+
+    </div>
+    <div class="col-6 md:col-3 p-fluid">
+      <label>{{tipo.value ==='RECEITA' ? 'Recebimento' : 'Pagamento'}}</label>
+      <p-calendar dateFormat="dd/mm/yy" name="dataPagamento" [(ngModel)]="lancamento.dataPagamento"></p-calendar>
+    </div>
+    <div class="col-12 md:col-9 p-fluid">
+      <label>Descrição</label>
+      <input type="text" pInputText ngModel name="descricao" ngModel #descricao="ngModel" required minlength="5" [(ngModel)]="lancamento.descricao">
+
+      <!-- <app-messagecomponent [control]="descricao" error="required" text="Informe uma descrição"></app-messagecomponent> -->
+
+      <p-message *ngIf="descricao.hasError('required') && descricao.dirty" severity="error" text="Informe uma descrição"></p-message>
+      <p-message *ngIf="descricao.hasError('minlength') && descricao.dirty" severity="error" text="Minimo de {{ descricao.errors?.minlength.requiredLength }} caracteres. "></p-message>
+    </div>
+    <div class="col-12 md:col-3 p-fluid">
+      <label>Valor</label>
+      <p-inputNumber mode="currency" currency="BRL"  locale="pt-BR" placeholder="0,00" ngModel name="valor" #valor="ngModel" [required]="true" [(ngModel)]="lancamento.valor"></p-inputNumber>
+      <p-message *ngIf="valor.hasError('required') && valor.touched" severity="error" text="Informe uma descrição"></p-message>
+
+    </div>
+    <div class="col-12 md:col-6 p-fluid">
+      <label>Categoria</label>
+      <p-dropdown [options]="categorias" placeholder="Selecione Categoria"  name="categoria" #categoria [required]="true" [(ngModel)]="lancamento.categoria.codigo"></p-dropdown>
+    </div>
+    <div class="col-12 md:col-6 p-fluid">
+      <label>Pessoa</label>
+      <p-dropdown [options]="pessoas" placeholder="Selecione Pessoa" [filter]="true"  #pessoa name="pessoa" [required]="true" [(ngModel)]="lancamento.pessoa.codigo" ></p-dropdown>
+
+    </div>
+    <div class="col-12 p-fluid">
+      <label>Observação</label>
+      <textarea  type="text" pInputTextarea rows="3"  name="observacao" [(ngModel)]="lancamento.observacao"></textarea>
+    </div>
+    <div class="col-12">
+      <button pButton type="submit" label="Salvar" class="p-button-info" [disabled]="!form.valid"></button>
+      <button pButton type="button" label="Novo" class="p-button-info" (click)="novo(form)" ></button>
+      <a routerLink="/lancamentos">Volta para a  Pesquisa</a>
+    </div>
+
+  </div>
+</form>
+</div>
